@@ -5,17 +5,15 @@
     xmlns:local="using:UWPWeather"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <StackPanel Background="HotPink">
-        <Button Content="Get Weather" Click="Button_Click"/>
-        <TextBlock Name="ResultTextBlock"/>
-        <Image Name="ResultImage" Width="200" Height="200" HorizontalAlignment="Center"/>
-        <!--<StackPanel VerticalAlignment="Center">
+        <StackPanel VerticalAlignment="Center">
             <Image Name="ResultImage" Width="200" Height="200" HorizontalAlignment="Center"/>
             <TextBlock Name="TempTextBlock" FontSize="52" Foreground="White" HorizontalAlignment="Center"/>
             <TextBlock Name="DescriptionTextBlock" FontSize="36" Foreground="White" HorizontalAlignment="Center"/>
             <TextBlock Name="LocationTextBlock" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
-        </StackPanel>-->
+        </StackPanel>
     </StackPanel>
 </Page>

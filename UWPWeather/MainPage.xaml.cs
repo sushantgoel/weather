@@ -28,14 +28,24 @@ namespace UWPWeather
             this.InitializeComponent();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var position = await LocationManager.getPosition();
+            try
+            {
+                var position = await LocationManager.getPosition();
 
-            RootObject myWeather = await OpenWeatherMapProxy.getWeather(position.Coordinate.Latitude, position.Coordinate.Longitude);
-            string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
-            ResultImage.Source = new BitmapImage(new Uri(icon,UriKind.Absolute));
-            ResultTextBlock.Text = myWeather.name + " - " + ((int)myWeather.main.temp).ToString() + " - " + myWeather.weather[0].description;
+                RootObject myWeather = await OpenWeatherMapProxy.getWeather(position.Coordinate.Latitude, position.Coordinate.Longitude);
+                string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
+                ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+                LocationTextBlock.Text = myWeather.name;
+                TempTextBlock.Text = ( (int) myWeather.main.temp ).ToString();
+                DescriptionTextBlock.Text = myWeather.weather[0].description;
+            }
+            catch (Exception)
+            {
+
+                LocationTextBlock.Text = "Unable to get weather get this time.";    
+            }
         }
     }
 }
