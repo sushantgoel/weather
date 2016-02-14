@@ -30,9 +30,11 @@ namespace UWPWeather
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            RootObject myWeather = await OpenWeatherMapProxy.getWeather(20, 30);
-            string icon = String.Format("http://openweathermap.org/img/w/{0}.png", myWeather.weather[0].icon).ToString();
-            ResultImage.Source = new BitmapImage(new Uri(icon, UriKind.Absolute));
+            var position = await LocationManager.getPosition();
+
+            RootObject myWeather = await OpenWeatherMapProxy.getWeather(position.Coordinate.Latitude, position.Coordinate.Longitude);
+            string icon = String.Format("ms-appx:///Assets/Weather/{0}.png", myWeather.weather[0].icon);
+            ResultImage.Source = new BitmapImage(new Uri(icon,UriKind.Absolute));
             ResultTextBlock.Text = myWeather.name + " - " + ((int)myWeather.main.temp).ToString() + " - " + myWeather.weather[0].description;
         }
     }
